@@ -2,6 +2,7 @@ import { Route, Switch } from 'react-router-dom'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
+import Dashboard from '../pages/Dashboard'
 
 function Routes() {
     return (
@@ -12,8 +13,11 @@ function Routes() {
             <Route path='/login'>
                 <Login />
             </Route>
-            <Route  >
+            <Route  path='/signup'>
                 <Signup />
+            </Route>
+            <Route  path='/dashboard'>
+                <Dashboard />
             </Route>
         </Switch>
     )
