@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useHistory, Redirect, Link } from 'react-router-dom'
 import api from "../../service/api";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -20,7 +20,9 @@ import {
 
 import { useState } from "react";
 
-function Signup() {
+function Signup( { authenticated, setAuthenticated } ) {
+  const history = useHistory()
+
   const [module, setModule] = useState("Module");
 
   const handleChange = (e) => {
@@ -51,6 +53,7 @@ function Signup() {
       .then((response) => {
         console.log(response);
         toast.success('Cadastro realizado com sucesso')
+        return history.push('/login')
       })
       .catch((err) => {
         console.log(err)
@@ -63,6 +66,10 @@ function Signup() {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  if (authenticated) {
+    return <Redirect to='/dashboard'/>
+  }
 
   return (
     <>

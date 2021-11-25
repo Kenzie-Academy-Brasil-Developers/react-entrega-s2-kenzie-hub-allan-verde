@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
@@ -5,19 +6,31 @@ import Signup from '../pages/Signup'
 import Dashboard from '../pages/Dashboard'
 
 function Routes() {
+    const [authenticated, setAuthenticated] = useState(false)
+
+    useEffect(() => {
+
+        const token = JSON.parse(localStorage.getItem('@Kenziehub:token'))
+
+        if (token) {
+            return setAuthenticated(true)
+        }
+
+    }, [authenticated])
+
     return (
         <Switch>
             <Route exact path='/'>
-                <Home />
+                <Home authenticated={authenticated} />
             </Route>
             <Route path='/login'>
-                <Login />
+                <Login authenticated={authenticated} setAuthenticated={setAuthenticated} />
             </Route>
             <Route  path='/signup'>
-                <Signup />
+                <Signup authenticated={authenticated} setAuthenticated={setAuthenticated} />
             </Route>
             <Route  path='/dashboard'>
-                <Dashboard />
+                <Dashboard authenticated={authenticated} setAuthenticated={setAuthenticated} />
             </Route>
         </Switch>
     )

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom"; 
 import api from "../../service/api";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -15,7 +15,7 @@ import {
   Button,
 } from "@mui/material";
 
-function Login() {
+function Login( { setAuthenticated, authenticated } ) {
   const schema = yup.object().shape({
     email: yup.string().email("Email inválido").required("Campo obrigatório"),
     password: yup
@@ -28,8 +28,16 @@ function Login() {
     api
       .post("/sessions", data)
       .then((response) => {
+        
+        const { token } = response.data
+        
+        localStorage.setItem('@Kenziehub:token', JSON.stringify(token))
+
+        setAuthenticated(true)
+
         console.log(response);
         toast.success('Login feito com sucesso')
+      
       })
       .catch((err) => {
         console.log(err)
@@ -43,6 +51,10 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+if (authenticated) {
+  return <Redirect to='/dashboard'/>
+}
 
   return (
     <Container component="main" maxWidth="xs">
