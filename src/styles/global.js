@@ -17,7 +17,12 @@ export default createGlobalStyle`
         --grey-0:#F5F5F5;
     }
     body {
-        background-color: var(--white);
+        background-color: var(--grey-0);
         color: var(--black)
+    }
+    .containerMenu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 `

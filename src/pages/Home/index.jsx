@@ -1,62 +1,30 @@
-import { useHistory, Redirect } from "react-router-dom";
-import { Container, CssBaseline, Box, Typography, Button } from "@mui/material";
+import { useHistory } from "react-router-dom";
+import { Container, Content } from "./styles";
+import Button from "../../components/Button";
 
-function Home({ authenticated }) {
+function Home() {
   const history = useHistory();
 
   const handleNavigation = (path) => {
     return history.push(path);
   };
 
-  if (authenticated) {
-    return <Redirect to="/dasboard" />;
-  }
-
   return (
-    <>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            mt: 6,
-          }}
-        >
-          <Typography component="h1" variant="h4">
-            Kenzie<span>Hub</span>
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <Button
-              onClick={() => handleNavigation("/signup")}
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Cadastre-se
-            </Button>
-
-            <Button
-              onClick={() => handleNavigation("/login")}
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Login
-            </Button>
-          </Box>
-        </Box>
-      </Container>
-    </>
+    <Container>
+      <Content>
+        <h1>
+          Kenzie<span>Hub</span>
+        </h1>
+        <div>
+          <Button onClick={() => handleNavigation("./login")} color="green">
+            Login
+          </Button>
+          <Button onClick={() => handleNavigation("./signup")} color="blue">
+            Cadastre-se
+          </Button>
+        </div>
+      </Content>
+    </Container>
   );
 }
 

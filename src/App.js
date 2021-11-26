@@ -1,12 +1,10 @@
 import Routes from './routes'
-import GlobalStyle from './styles/global';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
+
   return (
-    <div>
-      <GlobalStyle />
-        Hello World! Me livrei da maldição!
+    <div className='containerMenu'>
       <Routes />
       <Toaster />
     </div>
@@ -14,4 +12,3 @@ function App() {
 }
 
 export default App;
-// import { Box, Grid, Paper, styled } from "@mui/material"
